@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Memories - Share Your Special Moments</title>
+    <meta name="description" content="Share and celebrate your wedding memories with family and friends">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h2>Loading Wedding Memories...</h2>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="main-nav hidden">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-heart"></i>
+                <span>Wedding Memories</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#" id="nav-home" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" id="nav-gallery" class="nav-link">
+                    <i class="fas fa-images"></i>
+                    <span>Gallery</span>
+                </a>
+                <a href="#" id="nav-guestbook" class="nav-link">
+                    <i class="fas fa-book"></i>
+                    <span>Guestbook</span>
+                </a>
+                <a href="#" id="nav-upload" class="nav-link">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Upload</span>
+                </a>
+                <a href="#" id="nav-admin" class="nav-link admin-only hidden">
+                    <i class="fas fa-cog"></i>
+                    <span>Admin</span>
+                </a>
+            </div>
+            <div class="nav-actions">
+                <button id="theme-toggle" class="theme-toggle" title="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="login-btn" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </button>
+                <div id="user-menu" class="user-menu hidden">
+                    <button class="user-avatar">
+                        <img src="/images/default-avatar.png" alt="User Avatar" id="user-avatar-img">
+                        <span id="user-name">User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-dropdown">
+                        <a href="#" id="profile-link">
+                            <i class="fas fa-user"></i>
+                            Profile
+                        </a>
+                        <a href="#" id="my-events-link">
+                            <i class="fas fa-calendar"></i>
+                            My Events
+                        </a>
+                        <a href="#" id="logout-link">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-background">
+                    <div class="hero-overlay"></div>
+                    <img id="hero-image" src="/images/wedding-hero.jpg" alt="Wedding celebration">
+                </div>
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 id="hero-title">Welcome to Our Wedding</h1>
+                        <p id="hero-subtitle">Share your memories and celebrate with us</p>
+                        <div class="hero-date">
+                            <i class="fas fa-calendar"></i>
+                            <span id="hero-date-text">December 25, 2024</span>
+                        </div>
+                        <div class="hero-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="hero-location-text">Beautiful Venue</span>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <button id="upload-photos-btn" class="btn btn-primary btn-large">
+                            <i class="fas fa-camera"></i>
+                            Upload Photos
+                        </button>
+                        <button id="view-gallery-btn" class="btn btn-secondary btn-large">
+                            <i class="fas fa-images"></i>
+                            View Gallery
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="container">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="stats-photos">0</h3>
+                                <p>Photos Shared</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="stats-videos">0</h3>
+                                <p>Videos Shared</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="stats-likes">0</h3>
+                                <p>Likes Given</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="stats-comments">0</h3>
+                                <p>Messages Left</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Photos -->
+            <section class="featured-section">
+                <div class="container">
+                    <h2>Featured Moments</h2>
+                    <div id="featured-gallery" class="featured-gallery">
+                        <!-- Featured photos will be loaded here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Gallery Page -->
+        <div id="gallery-page" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Wedding Gallery</h1>
+                    <div class="gallery-controls">
+                        <div class="filter-controls">
+                            <select id="album-filter" class="filter-select">
+                                <option value="">All Albums</option>
+                            </select>
+                            <select id="type-filter" class="filter-select">
+                                <option value="">All Media</option>
+                                <option value="image">Photos</option>
+                                <option value="video">Videos</option>
+                            </select>
+                            <select id="sort-filter" class="filter-select">
+                                <option value="createdAt">Newest First</option>
+                                <option value="likes">Most Liked</option>
+                                <option value="comments">Most Commented</option>
+                            </select>
+                        </div>
+                        <div class="view-controls">
+                            <button id="grid-view" class="view-btn active" title="Grid View">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button id="list-view" class="view-btn" title="List View">
+                                <i class="fas fa-list"></i>
+                            </button>
+                            <button id="slideshow-btn" class="btn btn-primary" title="Start Slideshow">
+                                <i class="fas fa-play"></i>
+                                Slideshow
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="gallery-container" class="gallery-container">
+                    <div id="gallery-grid" class="gallery-grid">
+                        <!-- Gallery items will be loaded here -->
+                    </div>
+                    <div id="gallery-loading" class="loading-more hidden">
+                        <div class="loading-spinner"></div>
+                        <span>Loading more photos...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guestbook Page -->
+        <div id="guestbook-page" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Wedding Guestbook</h1>
+                    <p>Leave your wishes and memories for the happy couple</p>
+                </div>
+
+                <!-- Add Message Form -->
+                <div class="guestbook-form-container">
+                    <form id="guestbook-form" class="guestbook-form">
+                        <div class="form-group">
+                            <label for="guest-name">Your Name *</label>
+                            <input type="text" id="guest-name" name="guestName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guest-email">Email (Optional)</label>
+                            <input type="email" id="guest-email" name="guestEmail">
+                        </div>
+                        <div class="form-group">
+                            <label for="guest-message">Your Message *</label>
+                            <textarea id="guest-message" name="textMessage" rows="4" placeholder="Share your wishes, memories, or advice for the couple..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="record-audio" class="btn btn-secondary">
+                                <i class="fas fa-microphone"></i>
+                                Record Audio
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Guestbook Entries -->
+                <div id="guestbook-entries" class="guestbook-entries">
+                    <!-- Entries will be loaded here -->
+                </div>
+
+                <div id="guestbook-loading" class="loading-more hidden">
+                    <div class="loading-spinner"></div>
+                    <span>Loading more messages...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Page -->
+        <div id="upload-page" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Share Your Photos</h1>
+                    <p>Upload your favorite moments from the celebration</p>
+                </div>
+
+                <!-- Guest Info Form -->
+                <div id="guest-info-form" class="guest-info-form">
+                    <h3>Tell us who you are</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="uploader-name">Your Name *</label>
+                            <input type="text" id="uploader-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="uploader-email">Email (Optional)</label>
+                            <input type="email" id="uploader-email">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload Area -->
+                <div class="upload-container">
+                    <div id="drop-zone" class="drop-zone">
+                        <div class="drop-zone-content">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h3>Drag & Drop Photos or Videos</h3>
+                            <p>Or click to select files</p>
+                            <button type="button" class="btn btn-primary">
+                                <i class="fas fa-folder-open"></i>
+                                Select Files
+                            </button>
+                            <input type="file" id="file-input" multiple accept="image/*,video/*" hidden>
+                        </div>
+                    </div>
+
+                    <!-- Upload Options -->
+                    <div class="upload-options">
+                        <div class="form-group">
+                            <label for="upload-album">Album</label>
+                            <select id="upload-album">
+                                <option value="All Photos">All Photos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="upload-caption">Caption (Optional)</label>
+                            <input type="text" id="upload-caption" placeholder="Add a caption to your photos...">
+                        </div>
+                    </div>
+
+                    <!-- Upload Queue -->
+                    <div id="upload-queue" class="upload-queue hidden">
+                        <h3>Files to Upload</h3>
+                        <div id="upload-items" class="upload-items">
+                            <!-- Upload items will appear here -->
+                        </div>
+                        <div class="upload-actions">
+                            <button id="clear-queue" class="btn btn-secondary">
+                                <i class="fas fa-trash"></i>
+                                Clear All
+                            </button>
+                            <button id="start-upload" class="btn btn-primary">
+                                <i class="fas fa-upload"></i>
+                                Upload All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard (for authenticated users) -->
+        <div id="admin-page" class="page admin-only">
+            <div class="container">
+                <div class="admin-header">
+                    <h1>Event Dashboard</h1>
+                    <div class="admin-actions">
+                        <button id="create-event-btn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Create Event
+                        </button>
+                        <button id="generate-qr-btn" class="btn btn-secondary">
+                            <i class="fas fa-qrcode"></i>
+                            Generate QR Code
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Admin Tabs -->
+                <div class="admin-tabs">
+                    <button class="tab-btn active" data-tab="overview">Overview</button>
+                    <button class="tab-btn" data-tab="media">Media Management</button>
+                    <button class="tab-btn" data-tab="guestbook-admin">Guestbook</button>
+                    <button class="tab-btn" data-tab="settings">Settings</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <div id="overview-tab" class="tab-pane active">
+                        <!-- Overview content will be loaded here -->
+                    </div>
+                    <div id="media-tab" class="tab-pane">
+                        <!-- Media management content will be loaded here -->
+                    </div>
+                    <div id="guestbook-admin-tab" class="tab-pane">
+                        <!-- Guestbook management content will be loaded here -->
+                    </div>
+                    <div id="settings-tab" class="tab-pane">
+                        <!-- Settings content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" data-action="register">
+                            Register
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div id="password-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Event Password Required</h2>
+            </div>
+            <div class="modal-body">
+                <p>This event is password protected. Please enter the password to continue.</p>
+                <form id="password-form">
+                    <div class="form-group">
+                        <label for="event-password">Password</label>
+                        <input type="password" id="event-password" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            Access Event
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Viewer Modal -->
+    <div id="photo-modal" class="modal photo-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="photo-info">
+                    <h3 id="photo-title">Photo Title</h3>
+                    <p id="photo-meta">Uploaded by Guest • 2 hours ago</p>
+                </div>
+                <div class="photo-actions">
+                    <button id="photo-like" class="btn btn-ghost">
+                        <i class="far fa-heart"></i>
+                        <span id="photo-like-count">0</span>
+                    </button>
+                    <button id="photo-share" class="btn btn-ghost">
+                        <i class="fas fa-share"></i>
+                    </button>
+                    <button id="photo-download" class="btn btn-ghost">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="modal-close">&times;</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="photo-container">
+                    <img id="modal-photo" src="" alt="Photo">
+                    <video id="modal-video" controls class="hidden">
+                        <source src="" type="video/mp4">
+                    </video>
+                </div>
+                <div class="photo-nav">
+                    <button id="prev-photo" class="nav-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button id="next-photo" class="nav-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="photo-comments">
+                    <h4>Comments</h4>
+                    <div id="photo-comments-list" class="comments-list">
+                        <!-- Comments will be loaded here -->
+                    </div>
+                    <form id="photo-comment-form" class="comment-form">
+                        <input type="text" placeholder="Add a comment..." required>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slideshow Modal -->
+    <div id="slideshow-modal" class="modal slideshow-modal">
+        <div class="slideshow-container">
+            <div class="slideshow-header">
+                <h3 id="slideshow-title">Wedding Slideshow</h3>
+                <div class="slideshow-controls">
+                    <button id="slideshow-play" class="btn btn-ghost">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="slideshow-pause" class="btn btn-ghost hidden">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <button class="modal-close">&times;</button>
+                </div>
+            </div>
+            <div class="slideshow-content">
+                <img id="slideshow-image" src="" alt="Slideshow Photo">
+                <div class="slideshow-info">
+                    <p id="slideshow-caption"></p>
+                    <span id="slideshow-counter">1 / 10</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Recorder Modal -->
+    <div id="audio-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Record Audio Message</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="audio-recorder">
+                    <div class="recording-status">
+                        <div id="recording-indicator" class="recording-indicator"></div>
+                        <span id="recording-time">00:00</span>
+                    </div>
+                    <div class="recording-controls">
+                        <button id="start-recording" class="btn btn-primary">
+                            <i class="fas fa-microphone"></i>
+                            Start Recording
+                        </button>
+                        <button id="stop-recording" class="btn btn-danger hidden">
+                            <i class="fas fa-stop"></i>
+                            Stop Recording
+                        </button>
+                        <button id="play-recording" class="btn btn-secondary hidden">
+                            <i class="fas fa-play"></i>
+                            Play
+                        </button>
+                        <button id="save-recording" class="btn btn-success hidden">
+                            <i class="fas fa-save"></i>
+                            Use Recording
+                        </button>
+                    </div>
+                    <audio id="audio-playback" controls class="hidden"></audio>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container">
+        <!-- Toast notifications will appear here -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/components/gallery.js"></script>
+    <script src="/js/components/guestbook.js"></script>
+    <script src="/js/components/upload.js"></script>
+    <script src="/js/components/slideshow.js"></script>
+    <script src="/js/components/audio.js"></script>
+    <script src="/js/components/modals.js"></script>
+    <script src="/js/admin.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
