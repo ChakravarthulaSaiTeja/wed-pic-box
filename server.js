@@ -31,10 +31,42 @@ const io = socketIo(server, {
   }
 });
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/wedding-memories')
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.error('MongoDB connection error:', err));
+// Connect to MongoDB with better error handling
+const connectDB = async () => {
+  try {
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/wedding-memories';
+    await mongoose.connect(mongoURI);
+    console.log('Connected to MongoDB');
+  } catch (err) {
+    console.error('MongoDB connection error:', err.message);
+    console.log('⚠️  Running without database - some features will be limited');
+    console.log('💡 To enable full functionality, install MongoDB or set up a cloud database');
+  }
+};
+
+connectDB();
+
+// Session configuration (after database connection attempt)
+const sessionConfig = {
+  secret: process.env.SESSION_SECRET || 'your-session-secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
+};
+
+// Only use MongoStore if MongoDB is connected
+if (mongoose.connection.readyState === 1) {
+  sessionConfig.store = MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/wedding-memories',
+    touchAfter: 24 * 3600 // lazy session update
+  });
+}
+
+app.use(session(sessionConfig));
 
 // Security middleware
 app.use(helmet({
@@ -72,21 +104,7 @@ app.use(compression());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Session configuration
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'your-session-secret',
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/wedding-memories',
-    touchAfter: 24 * 3600 // lazy session update
-  }),
-  cookie: {
-    secure: process.env.NODE_ENV === 'production',
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
-  }
-}));
+
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -121,6 +139,16 @@ app.use('/api/events', eventRoutes);
 app.use('/api/media', mediaRoutes);
 app.use('/api/guestbook', guestbookRoutes);
 app.use('/api/qr', qrRoutes);
+
+// Mock data route for demo purposes when database is not available
+app.get('/api/mock/status', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Server is running',
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    timestamp: new Date().toISOString()
+  });
+});
 
 // Serve the main application
 app.get('*', (req, res) => {
