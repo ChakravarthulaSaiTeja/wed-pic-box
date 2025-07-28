@@ -2,6 +2,15 @@
 
 A comprehensive wedding photo-sharing web application that allows wedding guests to share memories seamlessly while providing hosts with powerful management tools.
 
+**🚀 Recently Refactored with React + TypeScript Frontend!**
+
+The frontend has been completely refactored from vanilla JavaScript to a modern React + TypeScript application with:
+- Beautiful wedding-themed UI with styled-components
+- Type-safe development with TypeScript
+- Modern React patterns with hooks and context
+- Responsive design for all devices
+- Real-time features ready for Socket.io integration
+
 ## 🌟 Features
 
 ### Guest Experience (No Registration Required)
@@ -81,11 +90,14 @@ EMAIL_PASS=your-app-password
 
 4. **Start the application**
 ```bash
-# Development mode
+# Development mode (runs both server and React client)
 npm run dev
 
-# Production mode
+# Production mode (serves built React app)
 npm start
+
+# Build React application for production
+npm run build
 ```
 
 5. **Access the application**
@@ -97,7 +109,7 @@ npm start
 ```
 wedding-memories/
 ├── server.js                 # Main server file
-├── package.json             # Dependencies and scripts
+├── package.json             # Root dependencies and scripts
 ├── .env.example            # Environment variables template
 │
 ├── models/                 # Database models
@@ -120,11 +132,20 @@ wedding-memories/
 ├── utils/                # Utility functions
 │   └── cloudinary.js    # File upload utilities
 │
-└── public/               # Frontend files
+├── client/               # React frontend application
+│   ├── src/
+│   │   ├── components/   # React components
+│   │   ├── pages/        # Page components
+│   │   ├── services/     # API services
+│   │   ├── context/      # React context
+│   │   ├── types/        # TypeScript types
+│   │   └── App.tsx       # Main App component
+│   ├── public/           # Static assets
+│   └── package.json      # Client dependencies
+│
+└── public/               # Built frontend files (served by Express)
     ├── index.html        # Main HTML file
-    ├── css/              # Stylesheets
-    ├── js/               # JavaScript modules
-    └── images/           # Static images
+    └── static/           # CSS, JS, and other assets
 ```
 
 ## 🔧 Configuration
